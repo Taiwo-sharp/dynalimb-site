@@ -24,12 +24,23 @@
   /* Hero video */
   var video = $("#heroVideo");
   if (video && M.hero) {
-    var h = M.hero;
-    if (h.poster) video.setAttribute("poster", h.poster);
-    var sources = [];
-    if (h.webm) sources.push(["video/webm", h.webm]);
-    if (h.mp4) sources.push(["video/mp4", h.mp4]);
-    if (sources.length) {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    // Portrait phones get the portrait cut (if provided); everything else gets the landscape cut.
+    var portraitMQ = window.matchMedia && window.matchMedia("(orientation: portrait) and (max-width: 900px)");
+    var currentVariant = null;
+    function heroVariant() {
+      var m = M.hero.mobile;
+      return (portraitMQ && portraitMQ.matches && m && (m.mp4 || m.webm)) ? m : M.hero;
+    }
+    function loadHero() {
+      var h = heroVariant();
+      if (h === currentVariant) return;
+      currentVariant = h;
+      if (h.poster) video.setAttribute("poster", h.poster);
+      var sources = [];
+      if (h.webm) sources.push(["video/webm", h.webm]);
+      if (h.mp4) sources.push(["video/mp4", h.mp4]);
+      if (!sources.length) return;
       video.innerHTML = "";
       sources.forEach(function (s) {
         var el = document.createElement("source");
@@ -37,10 +48,14 @@
         video.appendChild(el);
       });
       video.load();
+      if (reduce && reduce.matches) { video.removeAttribute("autoplay"); video.pause(); }
+      else { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
     }
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce && reduce.matches) { video.removeAttribute("autoplay"); video.pause(); }
-    else { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    loadHero();
+    if (portraitMQ) {
+      if (portraitMQ.addEventListener) portraitMQ.addEventListener("change", loadHero);
+      else if (portraitMQ.addListener) portraitMQ.addListener(loadHero);
+    }
   }
 
   /* Pause / play controls */

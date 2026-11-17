@@ -13,11 +13,18 @@ window.DYNALIMB_MEDIA = {
   /* HERO VIDEO ------------------------------------------------------------
      mp4  = main file (H.264, ideally 1920x1080, under ~8 MB, no audio)
      webm = optional smaller alternative, leave "" if you don't have one
-     poster = still image shown while the video loads / if motion is reduced   */
+     poster = still image shown while the video loads / if motion is reduced
+     mobile = optional portrait version for phones (portrait screens up to 900px wide);
+              leave its fields "" to use the main video everywhere            */
   hero: {
-    mp4:    "media/hero-placeholder.mp4",
-    webm:   "",
-    poster: "media/placeholders/hero-poster.svg"
+    mp4:    "media/hero.mp4",
+    webm:   "media/hero.webm",
+    poster: "media/hero-poster.webp",
+    mobile: {
+      mp4:    "media/hero-mobile.mp4",
+      webm:   "media/hero-mobile.webm",
+      poster: "media/hero-mobile-poster.webp"
+    }
   },
 
   /* IMAGES ----------------------------------------------------------------
