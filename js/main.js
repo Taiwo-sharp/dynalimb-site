@@ -12,6 +12,7 @@
     if (entry) {
       if (entry.src && img.getAttribute("src") !== entry.src) img.setAttribute("src", entry.src);
       if (typeof entry.alt === "string") img.setAttribute("alt", entry.alt);
+      if (entry.position) img.style.objectPosition = entry.position;
     }
     // If a real file is missing/misnamed, fall back to the placeholder instead of a broken icon.
     img.addEventListener("error", function onErr() {

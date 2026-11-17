@@ -28,12 +28,14 @@ window.DYNALIMB_MEDIA = {
   },
 
   /* IMAGES ----------------------------------------------------------------
-     key: { src: path, alt: description for screen readers, size: recommended } */
+     key: { src: path, alt: description for screen readers, size: recommended,
+            position: optional focus point when the photo is cropped to fit,
+                      "50% 0%" = keep the top, "50% 100%" = keep the bottom } */
   images: {
-    "story-1":              { src: "media/placeholders/story-1.svg",              alt: "Clinician assisting a patient",                  size: "900×800" },
-    "story-2":              { src: "media/placeholders/story-2.svg",              alt: "Patient with a prosthetic leg in a therapy room", size: "1200×800" },
-    "story-3":              { src: "media/placeholders/story-3.svg",              alt: "Child being fitted for a mobility device",        size: "900×800" },
-    "story-4":              { src: "media/placeholders/story-4.svg",              alt: "Dynalimb team at work",                          size: "900×800" },
+    "story-1":              { src: "media/story-1.webp", position: "50% 80%", alt: "Patient with a prosthetic leg standing in a doorway beside a Dynalimb clinician", size: "900×800" },
+    "story-2":              { src: "media/story-2.webp", position: "50% 85%", alt: "Prosthetic foot in a white clog beside the patient's other foot", size: "1200×800" },
+    "story-3":              { src: "media/story-3.webp", position: "50% 62%", alt: "Ankle-foot orthosis with a floral lining", size: "900×800" },
+    "story-4":              { src: "media/story-4.webp", position: "50% 50%", alt: "Prosthetic socket held up in front of the Dynalimb Technologies sign", size: "900×800" },
 
     "service-prosthetics":  { src: "media/placeholders/service-prosthetics.svg",  alt: "People wearing prosthetic legs",                  size: "960×560" },
     "service-3d":           { src: "media/placeholders/service-3d.svg",           alt: "3D printer fabricating a device",                 size: "960×560" },
