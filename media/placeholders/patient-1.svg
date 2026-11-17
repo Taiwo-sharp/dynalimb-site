@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1000" viewBox="0 0 980 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4dae0"/><stop offset="1" stop-color="#eef0f2"/></linearGradient></defs>
+<rect width="980" height="1000" fill="url(#g)"/>
+<g fill="none" stroke="#333333" stroke-opacity=".35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="419.6" y="394.4" width="140.8" height="105.6" rx="13.2"/>
+<circle cx="463.6" cy="429.6" r="15.399999999999999"/>
+<path d="M419.6 482.4 l48.400000000000006 -39.6 l35.2 26.4 l22.0 -17.6 l35.2 30.799999999999997"/></g>
+<text x="490.0" y="548.4" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#333333" fill-opacity=".7">Patient photo 1</text>
+<text x="490.0" y="605.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#333333" fill-opacity=".5">placeholder · 980×1000 · slot “patient-1”</text>
+</svg>

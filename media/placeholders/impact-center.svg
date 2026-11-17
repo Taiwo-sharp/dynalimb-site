@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="900" viewBox="0 0 700 900">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8c9bd"/><stop offset="1" stop-color="#e9e3dd"/></linearGradient></defs>
+<rect width="700" height="900" fill="url(#g)"/>
+<g fill="none" stroke="#333333" stroke-opacity=".35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<rect x="300.4" y="375.6" width="99.2" height="74.39999999999999" rx="9.299999999999999"/>
+<circle cx="331.4" cy="400.4" r="10.85"/>
+<path d="M300.4 437.6 l34.1 -27.900000000000002 l24.8 18.599999999999998 l15.5 -12.4 l24.8 21.7"/></g>
+<text x="350.0" y="484.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#333333" fill-opacity=".7">Impact image (DynaX on tablet)</text>
+<text x="350.0" y="524.4" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#333333" fill-opacity=".5">placeholder · 700×900 · slot “impact-center”</text>
+</svg>

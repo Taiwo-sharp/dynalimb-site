@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="900" viewBox="0 0 1920 900">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#33403a"/><stop offset="1" stop-color="#1c2420"/></linearGradient></defs>
+<rect width="1920" height="900" fill="url(#g)"/>
+<g fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="896.0" y="354.0" width="128.0" height="96.0" rx="12.0"/>
+<circle cx="936.0" cy="386.0" r="14.0"/>
+<path d="M896.0 434.0 l44.0 -36.0 l32.0 24.0 l20.0 -16.0 l32.0 28.0"/></g>
+<text x="960.0" y="494.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff" fill-opacity=".7">Therapay background</text>
+<text x="960.0" y="546.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" fill-opacity=".5">placeholder · 1920×900 · slot “therapay-bg”</text>
+</svg>

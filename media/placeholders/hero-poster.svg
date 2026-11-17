@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a2f33"/><stop offset="1" stop-color="#4a4146"/></linearGradient></defs>
+<rect width="1920" height="1080" fill="url(#g)"/>
+<g fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="881.6" y="422.4" width="156.8" height="117.6" rx="14.7"/>
+<circle cx="930.6" cy="461.6" r="17.15"/>
+<path d="M881.6 520.4 l53.900000000000006 -44.1 l39.2 29.4 l24.5 -19.6 l39.2 34.3"/></g>
+<text x="960.0" y="593.9" text-anchor="middle" font-family="Arial, sans-serif" font-size="49" font-weight="700" fill="#ffffff" fill-opacity=".7">Hero video poster</text>
+<text x="960.0" y="657.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#ffffff" fill-opacity=".5">placeholder · 1920×1080 · slot “hero-poster”</text>
+</svg>

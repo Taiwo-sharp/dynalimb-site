@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f3f3"/></linearGradient></defs>
+<rect width="400" height="200" fill="url(#g)"/>
+<g fill="none" stroke="#333333" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="177.6" y="66.4" width="44.800000000000004" height="33.6" rx="4.2"/>
+<circle cx="191.6" cy="77.6" r="4.8999999999999995"/>
+<path d="M177.6 94.4 l15.400000000000002 -12.6 l11.200000000000001 8.4 l7.0 -5.6000000000000005 l11.200000000000001 9.799999999999999"/></g>
+<text x="200.0" y="115.4" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#333333" fill-opacity=".7">FAOP</text>
+<text x="200.0" y="133.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#333333" fill-opacity=".5">placeholder · 400×200 · slot “partner-faop”</text>
+</svg>

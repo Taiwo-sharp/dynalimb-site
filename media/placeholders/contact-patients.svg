@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d3e7ee"/><stop offset="1" stop-color="#eef7fa"/></linearGradient></defs>
+<rect width="960" height="480" fill="url(#g)"/>
+<g fill="none" stroke="#333333" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="446.4" y="189.6" width="67.2" height="50.4" rx="6.3"/>
+<circle cx="467.4" cy="206.4" r="7.35"/>
+<path d="M446.4 231.6 l23.1 -18.900000000000002 l16.8 12.6 l10.5 -8.4 l16.8 14.7"/></g>
+<text x="480.0" y="263.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#333333" fill-opacity=".7">Contact: for patients</text>
+<text x="480.0" y="290.4" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333333" fill-opacity=".5">placeholder · 960×480 · slot “contact-patients”</text>
+</svg>

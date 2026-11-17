@@ -1,0 +1,22 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Node tooling (serve, sharp, playwright)
+node_modules/
+npm-debug.log*
+
+# Original, unoptimised media (kept locally, not served or committed)
+media-originals/
+
+# Local screenshots / test output
+screenshots/
+test-results/
+playwright-report/
+
+# Env / secrets
+.env
+.env.*
