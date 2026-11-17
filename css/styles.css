@@ -4,9 +4,10 @@
    ========================================================= */
 :root{
   --teal:#15c9d0; --teal-dark:#0fb3ba;
+  --teal-text:#087f84; /* darker teal for small text on white (contrast) */
   --navy:#0a1342; --ink:#333333; --ink-soft:#4a4a4a;
   --lav:#e8e7fb; --cyan:#a8eaed; --blue:#c7d7ff; --purple:#e2c7ff; --green:#dcffc7;
-  --beige:#f5f3ef; --sky:#ebfaff; --grey-text:#c8c8c8;
+  --beige:#f5f3ef; --sky:#ebfaff; --grey-text:#8f8f8f;
   --r-card:28px; --r-pill:999px;
   --font-head:"Schibsted Grotesk","Manrope",system-ui,sans-serif;
   --font-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -26,7 +27,7 @@ h1,h2,h3,h4,p{margin:0}
 :focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
 
 /* ---------- Type ---------- */
-.eyebrow{font-weight:700;font-size:15px;letter-spacing:.01em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.eyebrow{font-weight:700;font-size:15px;letter-spacing:.01em;text-transform:uppercase;color:var(--teal-text);margin-bottom:12px}
 .eyebrow-light{color:var(--teal)}
 .eyebrow-navy{color:var(--navy)}
 .h2{font-family:var(--font-head);font-weight:600;font-size:clamp(34px,3.6vw,48px);line-height:1.08;letter-spacing:-.035em;color:var(--ink)}
@@ -65,7 +66,7 @@ h1,h2,h3,h4,p{margin:0}
 .nav>ul{display:flex;gap:32px;position:absolute;left:50%;transform:translateX(-50%)}
 .nav a:not(.btn),.sub-toggle{text-decoration:none;font:500 15px/1 var(--font-body);color:#1c1c1c;background:none;border:0;padding:8px 0;cursor:pointer}
 .nav a.is-active:not(.btn){font-weight:700;color:var(--navy)}
-.nav a:not(.btn):hover,.sub-toggle:hover{color:var(--teal-dark)}
+.nav a:not(.btn):hover,.sub-toggle:hover{color:var(--teal-text)}
 .nav-cta{display:flex;gap:12px;margin-left:auto}
 .nav-cta .btn{height:42px;padding:0 22px;font-size:14px}
 .has-sub{position:relative}
@@ -208,15 +209,15 @@ h1,h2,h3,h4,p{margin:0}
 .fcol h3{font:800 16px/1 var(--font-body);color:var(--navy);margin-bottom:26px;letter-spacing:.01em}
 .fcol>ul:not(.contact-list):not(.socials){display:grid;gap:15px;margin-bottom:28px}
 .fcol a{text-decoration:none;font-size:15px;font-weight:500}
-.fcol a:not(.btn):hover{color:var(--teal-dark)}
+.fcol a:not(.btn):hover{color:var(--teal-text)}
 .contact-list{display:grid;gap:18px}
 .contact-list li{display:flex;gap:12px;align-items:flex-start;font-size:15px;font-weight:500}
 .contact-list address{font-style:normal;max-width:210px;line-height:1.5}
 .contact-list svg{flex:0 0 18px;width:18px;height:18px;margin-top:2px;fill:none;stroke:#333;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .socials{display:flex;gap:14px;margin-top:26px}
 .socials svg{width:24px;height:24px;fill:#555;color:#555}
-.socials .ig{fill:none;stroke:#555}.socials a:hover .ig{stroke:var(--teal-dark)}
-.socials a:hover svg{fill:var(--teal-dark);color:var(--teal-dark)}
+.socials .ig{fill:none;stroke:#555}.socials a:hover .ig{stroke:var(--teal-text)}
+.socials a:hover svg{fill:var(--teal-text);color:var(--teal-text)}
 .copyright{grid-column:1/-1;align-self:end;font-size:14.5px;font-weight:500;color:#444;margin-top:80px}
 .copyright b{color:var(--navy)}
 .footer-photo{width:100%;height:100%;min-height:490px;object-fit:cover;border-radius:22px}
