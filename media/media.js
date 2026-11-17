@@ -56,21 +56,25 @@ window.DYNALIMB_MEDIA = {
     "story-2":              { src: "media/story-2.webp", position: "50% 85%", alt: "Prosthetic foot in a white clog beside the patient's other foot", size: "1200×800" },
     "story-3":              { src: "media/story-3.webp", position: "50% 62%", alt: "Ankle-foot orthosis with a floral lining", size: "900×800" },
     "story-4":              { src: "media/story-4.webp", position: "50% 50%", alt: "Prosthetic socket held up in front of the Dynalimb Technologies sign", size: "900×800" },
+    "story-5":              { src: "media/story-5.webp", position: "50% 70%", alt: "Patient wearing a black prosthetic leg with trainers beside a car", size: "900×800" },
+    "story-6":              { src: "media/story-6.webp", position: "50% 60%", alt: "Prosthetic leg on a staircase", size: "900×800" },
+    "story-7":              { src: "media/story-7.webp", position: "50% 50%", alt: "Patterned ankle-foot orthosis held in a hand", size: "900×800" },
+    "story-8":              { src: "media/story-8.webp", position: "50% 55%", alt: "Close-up of a skin-tone prosthetic socket being fitted", size: "900×800" },
+    "story-9":              { src: "media/story-9.webp", position: "50% 60%", alt: "Black socket being 3D printed", size: "900×800" },
 
-    "service-prosthetics":  { src: "media/service-prosthetics.webp",  alt: "People wearing prosthetic legs",                  size: "960×560" },
-    "service-3d":           { src: "media/service-3d.webp",           alt: "3D printer fabricating a device",                 size: "960×560" },
-    "service-clinical":     { src: "media/service-clinical.webp",     alt: "Rehabilitation session with a physiotherapist",   size: "960×560" },
-    "service-digital":      { src: "media/service-digital.webp",      alt: "Digital health and telehealth",                   size: "960×560" },
+    "service-prosthetics":  { src: "media/service-prosthetics.webp", position: "50% 70%", alt: "Prosthetic leg with a patterned socket in the Dynalimb studio", size: "960×560" },
+    "service-3d":           { src: "media/service-3d.webp", position: "50% 55%", alt: "Prosthetic socket on a 3D printer bed", size: "960×560" },
+    "service-clinical":     { src: "media/service-clinical.webp", position: "50% 55%", alt: "Patient standing on a fitted prosthetic leg", size: "960×560" },
+    "service-digital":      { src: "media/service-digital.webp", position: "50% 45%", alt: "Clinician 3D scanning with DynaX on a laptop", size: "960×560" },
 
     "therapay-bg":          { src: "media/therapay-bg.webp",          alt: "",                                                size: "1920×900" },
     "impact-center":        { src: "media/impact-center.webp",        alt: "A clinician using the DynaX tablet app",          size: "700×900" },
 
-    "patient-1":            { src: "media/patient-1.webp",            alt: "Patient training in a gym",                       size: "980×1000" },
-    "patient-2":            { src: "media/placeholders/patient-2.svg", alt: "Patient walking with a prosthetic",              size: "980×1000" },
+    "patient-1":            { src: "media/patient-1.webp", position: "50% 50%", alt: "Patient with a prosthetic leg sitting and talking on the phone", size: "980×1000" },
+    "patient-2":            { src: "media/patient-2.webp", position: "50% 75%", alt: "Patient standing on a black prosthetic leg", size: "980×1000" },
 
-    /* The design uses the same photo for both contact cards */
-    "contact-patients":     { src: "media/contact.webp",              alt: "",                                                size: "960×480" },
-    "contact-orgs":         { src: "media/contact.webp",              alt: "",                                                size: "960×480" },
+    "contact-patients":     { src: "media/contact-patients.webp", position: "50% 45%", alt: "Clinician adjusting a patient's prosthetic leg", size: "960×480" },
+    "contact-orgs":         { src: "media/contact-orgs.webp", position: "50% 35%", alt: "Finished prosthetic leg in the Dynalimb Technologies studio", size: "960×480" },
     "footer-photo":         { src: "media/footer-photo.webp",         alt: "Two healthcare professionals",                    size: "820×860" },
 
     /* Partner logos (4 large cards) — transparent PNG/SVG works best */
