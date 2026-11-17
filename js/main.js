@@ -43,6 +43,28 @@
     else { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
   }
 
+  /* Pause / play controls */
+  function setToggle(btn, paused, what) {
+    btn.setAttribute("aria-pressed", paused ? "true" : "false");
+    btn.setAttribute("aria-label", (paused ? "Play " : "Pause ") + what);
+  }
+  var heroBtn = $(".hero-toggle");
+  if (heroBtn && video) {
+    setToggle(heroBtn, video.paused && !video.autoplay, "background video");
+    heroBtn.addEventListener("click", function () {
+      if (video.paused) { var pp = video.play(); if (pp && pp.catch) pp.catch(function () {}); }
+      else video.pause();
+    });
+    video.addEventListener("play", function () { setToggle(heroBtn, false, "background video"); });
+    video.addEventListener("pause", function () { setToggle(heroBtn, true, "background video"); });
+  }
+  var marqueeBtn = $(".marquee-toggle"), marquee = $(".marquee");
+  if (marqueeBtn && marquee) {
+    marqueeBtn.addEventListener("click", function () {
+      setToggle(marqueeBtn, marquee.classList.toggle("paused"), "logo animation");
+    });
+  }
+
   /* ---------- 2. Patient story cards (rendered from the manifest) ---------- */
   var track = $("#storyTrack");
   if (track && M.stories) {
@@ -145,8 +167,8 @@
   });
   $$("#nav a").forEach(function (a) {
     a.addEventListener("click", function () {
-      nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false");
-      $$(".has-sub").forEach(function (li) { li.classList.remove("open"); });
+      nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", "Open menu");
+      $$(".has-sub").forEach(function (li) { li.classList.remove("open"); $(".sub-toggle", li).setAttribute("aria-expanded", "false"); });
     });
   });
   $$(".sub-toggle").forEach(function (b) {
@@ -160,7 +182,14 @@
     $$(".has-sub").forEach(function (li) { li.classList.remove("open"); $(".sub-toggle", li).setAttribute("aria-expanded", "false"); });
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") { $$(".has-sub").forEach(function (li) { li.classList.remove("open"); }); nav.classList.remove("open"); }
+    if (e.key !== "Escape") return;
+    $$(".has-sub").forEach(function (li) { li.classList.remove("open"); $(".sub-toggle", li).setAttribute("aria-expanded", "false"); });
+    if (nav.classList.contains("open")) {
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      toggle.focus();
+    }
   });
 
   // Active nav link while scrolling
