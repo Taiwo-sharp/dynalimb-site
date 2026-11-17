@@ -1,5 +1,5 @@
 /* =========================================================
-   Macy Foot spotlight: interactive 3D foot (drag to rotate, colour swatches)
+   Macy Foot spotlight: interactive 3D Donde Foot (drag to rotate, colour swatches)
    with the product film as a second view. Falls back to the film alone
    if WebGL or the model is unavailable.
    ========================================================= */

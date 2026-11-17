@@ -3,7 +3,7 @@
    Act 1 (scan):   points sweep into the socket shape
    Act 2 (design): wireframe, trimline and measured circumferences
    Act 3 (print):  solid socket built layer by layer
-   Act 4 (walk):   pylon + Macy Foot attach, the finished leg walks
+   Act 4 (walk):   pylon + Donde Foot attach, the finished leg walks
    three.js is only downloaded when the section comes near the viewport.
    ========================================================= */
 import { loadMesh, topPoint, creasedGeometry } from "./mesh.js";
@@ -250,7 +250,7 @@ async function startScene({ progress, isPaused, reduce }) {
   nozzle.rotation.x = -Math.PI / 2;
   group.add(nozzle);
 
-  /* Act 4: pylon + Macy Foot, then walking */
+  /* Act 4: pylon + Donde Foot, then walking */
   const pylonLen = 170 * s, pylonR = 15 * s;
   const pylon = new THREE.Mesh(
     new THREE.CylinderGeometry(pylonR, pylonR, pylonLen, 32),

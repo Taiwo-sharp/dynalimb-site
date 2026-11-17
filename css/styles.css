@@ -189,7 +189,7 @@ h1,h2,h3,h4,p{margin:0}
 .macy-tabs{position:absolute;left:12%;bottom:18px;display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18)}
 .macy-tabs button{font:700 13px/1 var(--font-body);color:rgba(255,255,255,.75);background:none;border:0;padding:8px 14px;border-radius:999px;cursor:pointer}
 .macy-tabs button[aria-pressed="true"]{background:#fff;color:#000}
-.macy-hint{position:absolute;left:calc(12% + 130px);bottom:28px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.macy-hint{position:absolute;left:calc(12% + 270px);bottom:28px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .macy-swatches{display:flex;gap:10px;margin:-8px 0 32px}
 .macy-swatches button{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.25);cursor:pointer;padding:0;transition:transform .15s,border-color .15s}
 .macy-swatches button:hover{transform:scale(1.1)}
