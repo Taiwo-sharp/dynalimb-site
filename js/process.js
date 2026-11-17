@@ -6,7 +6,7 @@
    Act 4 (walk):   pylon + Macy Foot attach, the finished leg walks
    three.js is only downloaded when the section comes near the viewport.
    ========================================================= */
-import { loadMesh, topPoint } from "./mesh.js";
+import { loadMesh, topPoint, creasedGeometry } from "./mesh.js";
 
 const section = document.getElementById("process");
 const M = (window.DYNALIMB_MEDIA || {}).process || {};
@@ -267,13 +267,14 @@ async function startScene({ progress, isPaused, reduce }) {
       const tp = topPoint(f.positions, f.count);             // pyramid adapter
       // Toe points away from the adapter along the foot's length (Z)
       toeDir = tp.z > 0 ? -1 : 1;
-      foot = new THREE.Mesh(f.geometry, new THREE.MeshStandardMaterial({ color: 0x1b1d22, roughness: 0.45, metalness: 0.1, transparent: true }));
+      const fGeom = creasedGeometry(THREE, f.geometry, 35);
+      foot = new THREE.Mesh(fGeom, new THREE.MeshStandardMaterial({ color: 0x1b1d22, roughness: 0.45, metalness: 0.1, transparent: true }));
       footHome.set(-tp.x, minY - pylonLen - tp.y, -tp.z);
       foot.position.copy(footHome);
       foot.visible = false;
       inner.add(foot);
-      f.geometry.computeBoundingBox();
-      floorY = footHome.y + f.geometry.boundingBox.min.y;
+      fGeom.computeBoundingBox();
+      floorY = footHome.y + fGeom.boundingBox.min.y;
     } catch (e) { console.warn("[process] foot model unavailable:", e); }
   }
 

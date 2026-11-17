@@ -3,7 +3,7 @@
    with the product film as a second view. Falls back to the film alone
    if WebGL or the model is unavailable.
    ========================================================= */
-import { loadMesh } from "./mesh.js";
+import { loadMesh, creasedGeometry } from "./mesh.js";
 
 const section = document.getElementById("macy");
 const MM = window.DYNALIMB_MEDIA || {};
@@ -79,10 +79,11 @@ async function startFoot(canvas, isPaused, reduce) {
   const camera = new THREE.PerspectiveCamera(30, 16 / 9, 0.1, 50);
 
   const f = await loadMesh(THREE, MAC.model, 1 / 100);       // 100 mm = 1 unit
-  f.geometry.computeBoundingBox();
-  const bb = f.geometry.boundingBox;
+  const fGeom = creasedGeometry(THREE, f.geometry, 35);
+  fGeom.computeBoundingBox();
+  const bb = fGeom.boundingBox;
   const mat = new THREE.MeshPhysicalMaterial({ color: 0x1b1d22, roughness: 0.38, metalness: 0.05, clearcoat: 0.6, clearcoatRoughness: 0.35 });
-  const foot = new THREE.Mesh(f.geometry, mat);
+  const foot = new THREE.Mesh(fGeom, mat);
   const holder = new THREE.Group();
   foot.position.y = -bb.min.y - (bb.max.y - bb.min.y) / 2;   // centre vertically
   holder.add(foot);
