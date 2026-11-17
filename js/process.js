@@ -33,6 +33,8 @@ function init() {
 
   if (reduce) section.classList.add("is-static");
 
+  function setIntro(on) { section.classList.toggle("at-intro", on); }
+
   function setStep(i) {
     if (i === activeStep) return;
     activeStep = i;
@@ -63,7 +65,8 @@ function init() {
     else { activeStep = -1; setStep(reduce ? 2 : stepFor(progress())); }
   }).observe(section);
 
-  if (!reduce) addEventListener("scroll", () => setStep(stepFor(progress())), { passive: true });
+  if (!reduce) addEventListener("scroll", () => { const p = progress(); setIntro(p < 0.05); setStep(stepFor(p)); }, { passive: true });
+  setIntro(!reduce && progress() < 0.05);
   setStep(reduce ? 2 : stepFor(progress()));
 
   toggle.addEventListener("click", () => {
@@ -80,7 +83,7 @@ function init() {
     near.disconnect();
     startScene({ progress, isPaused: () => paused, reduce }).catch(err => {
       console.warn("[process] 3D unavailable:", err);
-      section.classList.add("no-3d");
+      section.classList.add("no-3d"); section.classList.remove("at-intro");
     });
   }, { rootMargin: "100% 0px" });
   near.observe(section);
@@ -271,8 +274,6 @@ async function startScene({ progress, isPaused, reduce }) {
     renderer.setSize(W, Hh, false);
     camera.aspect = W / Hh;
     // Push the model right on desktop (text sits left), up on phones (text sits below)
-    if (mobile) camera.setViewOffset(W, Hh, 0, -Hh * 0.03, W, Hh);
-    else camera.setViewOffset(W, Hh, -W * 0.17, 0, W, Hh);
     camera.updateProjectionMatrix();
   }
   addEventListener("resize", resize);
@@ -282,7 +283,7 @@ async function startScene({ progress, isPaused, reduce }) {
   const ramp = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
   const ease = t => t * t * (3 - 2 * t);
   let shown = reduce ? 1 : progress();
-  let idle = 0, last = performance.now(), running = false;
+  let idle = 0, last = performance.now(), running = false, lift = 0;
   const introStart = performance.now();   // opening sweep on first view, before any scrolling
 
   function frame(now) {
@@ -290,6 +291,10 @@ async function startScene({ progress, isPaused, reduce }) {
     const target = reduce ? 1 : progress();
     shown += (target - shown) * Math.min(1, dt * 6);     // damped, cinematic catch-up
     const p = shown;
+    // Frame the model: right of the text on desktop; on phones, high while the intro text is up
+    lift += (((mobile && p < 0.05) ? 0.24 : -0.03) - lift) * Math.min(1, dt * 4);
+    if (mobile) camera.setViewOffset(W, Hh, 0, Hh * lift, W, Hh);
+    else camera.setViewOffset(W, Hh, -W * 0.17, 0, W, Hh);
     if (!isPaused()) idle += dt * 0.12;
 
     const intro = reduce ? 0 : ease(Math.min(1, (now - introStart) / 3000)) * 0.45;

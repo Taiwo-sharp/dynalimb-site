@@ -38,6 +38,7 @@
           <ul class="submenu">
             <li><a href="#dynax">DynaX</a></li>
             <li><a href="#therapay">Therapay</a></li>
+            <li><a href="#macy">Macy Foot</a></li>
           </ul>
         </li>
       </ul>
@@ -52,13 +53,24 @@
 <main id="main">
 
 <!-- ============ FROM SCAN TO STEP (scroll-driven 3D) ============ -->
-<section class="process" id="process" aria-labelledby="process-title">
+<section class="process at-intro" id="process" aria-labelledby="hero-title">
   <div class="process-sticky">
     <div class="process-glow" aria-hidden="true"></div>
     <canvas class="process-canvas" aria-hidden="true"></canvas>
     <div class="process-labels" aria-hidden="true"></div>
 
     <div class="container process-ui">
+      <div class="process-intro">
+        <p class="eyebrow eyebrow-light">3D-designed prosthetics and orthotics, made in Nigeria</p>
+        <h1 id="hero-title">Move with more comfort, confidence and independence.</h1>
+        <p class="process-intro-sub">Assessment, 3D design, fitting and rehabilitation, all in one place and closer to home.</p>
+        <div class="btn-row">
+          <a class="btn btn-teal btn-lg" href="#contact">I need your services</a>
+          <a class="btn btn-outline-light btn-lg" href="#contact">I’m a specialist</a>
+        </div>
+        <p class="process-cue" aria-hidden="true">Scroll to see how a socket is made</p>
+      </div>
+
       <header class="process-head">
         <p class="eyebrow eyebrow-light">From scan to step</p>
         <h2 id="process-title" class="h2 h2-light">How a Dynalimb socket is made</h2>
@@ -102,7 +114,7 @@
 </section>
 
 <!-- ============ HERO (video) ============ -->
-<section class="hero" aria-labelledby="hero-title">
+<section class="hero" aria-labelledby="video-title">
   <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="media/placeholders/hero-poster.svg" aria-hidden="true">
     <source src="media/hero-placeholder.mp4" type="video/mp4">
   </video>
@@ -112,14 +124,10 @@
     <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg>
   </button>
   <div class="container hero-inner">
-    <p class="eyebrow eyebrow-light">3D-designed prosthetics and orthotics, made in Nigeria</p>
-    <h1 id="hero-title">Move with more comfort, confidence and independence.</h1>
+    <p class="eyebrow eyebrow-light">Life after fitting</p>
+    <h2 id="video-title" class="hero-h">Real people, moving forward.</h2>
     <div class="hero-side">
-      <p>Assessment, 3D design, fitting and rehabilitation, all in one place and closer to home.</p>
-      <div class="btn-row">
-        <a class="btn btn-teal btn-lg" href="#contact">I need your services</a>
-        <a class="btn btn-outline-light btn-lg" href="#contact">I’m a specialist</a>
-      </div>
+      <p>Every device we make is fitted, adjusted and followed up close to home, so the first steps are only the beginning.</p>
     </div>
   </div>
 </section>
@@ -193,6 +201,22 @@
       </article>
     </div>
   </div>
+</section>
+
+<!-- ============ MACY FOOT (product spotlight) ============ -->
+<section class="macy" id="macy" aria-labelledby="macy-title">
+  <video class="macy-video" id="macyVideo" muted loop playsinline preload="none" aria-hidden="true"></video>
+  <div class="macy-shade" aria-hidden="true"></div>
+  <div class="container macy-inner">
+    <p class="eyebrow eyebrow-light">Innovation</p>
+    <h2 id="macy-title" class="h2 h2-light">Meet the Macy Foot</h2>
+    <p class="sub sub-light">A prosthetic foot designed by Dynalimb: water resistant, durable and flexible, in the colour you choose.</p>
+    <a class="btn btn-teal btn-lg" href="#contact">Ask about the Macy Foot</a>
+  </div>
+  <button class="media-toggle macy-toggle" type="button" aria-pressed="false" aria-label="Pause video">
+    <svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1"/><rect x="9.4" y="3" width="2.6" height="10" rx="1"/></svg>
+    <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg>
+  </button>
 </section>
 
 <!-- ============ THERAPAY ============ -->

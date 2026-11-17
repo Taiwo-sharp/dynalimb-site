@@ -27,6 +27,13 @@ window.DYNALIMB_MEDIA = {
     }
   },
 
+  /* MACY FOOT spotlight video (loops, no sound). mp4 listed first: it is the smaller file */
+  macy: {
+    mp4:    "media/macy-foot.mp4",
+    webm:   "media/macy-foot.webm",
+    poster: "media/macy-foot-poster.webp"
+  },
+
   /* FROM SCAN TO STEP (3D section) -----------------------------------------
      model = compact socket mesh converted from a DynaX STL (simplified, ~260 KB)
      clips = small looping videos shown beside step 1 and step 2              */
