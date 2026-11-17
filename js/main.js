@@ -71,8 +71,9 @@
       if (video.paused) { var pp = video.play(); if (pp && pp.catch) pp.catch(function () {}); }
       else video.pause();
     });
-    video.addEventListener("play", function () { setToggle(heroBtn, false, "background video"); });
-    video.addEventListener("pause", function () { setToggle(heroBtn, true, "background video"); });
+    var heroEl = video.closest(".hero");
+    video.addEventListener("play", function () { setToggle(heroBtn, false, "background video"); heroEl.classList.remove("paused"); });
+    video.addEventListener("pause", function () { setToggle(heroBtn, true, "background video"); heroEl.classList.add("paused"); });
   }
   var marqueeBtn = $(".marquee-toggle"), marquee = $(".marquee");
   if (marqueeBtn && marquee) {
@@ -229,6 +230,64 @@
   // Marquee: duplicate the logo strip once so the loop is seamless
   var mt = $(".marquee-track");
   if (mt) { Array.prototype.slice.call(mt.children).forEach(function (li) { var c = li.cloneNode(true); c.setAttribute("aria-hidden", "true"); mt.appendChild(c); }); }
+
+  /* ---------- Cinematic touches ---------- */
+  var motionOK = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  document.documentElement.classList.add("js");
+
+  // Rise-in on scroll
+  if ("IntersectionObserver" in window && motionOK) {
+    var rio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); rio.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    $$(".card, .stat, .ccard, .logo-cards li").forEach(function (el, i) {
+      el.classList.add("reveal");
+      el.style.transitionDelay = (i % 4) * 70 + "ms";
+      rio.observe(el);
+    });
+  }
+
+  // 3D tilt on service cards (mouse only)
+  if (motionOK && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    $$(".card").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        card.classList.add("tilting");
+        card.style.transitionDelay = "0ms";
+        card.style.setProperty("--ry", (x * 7).toFixed(2) + "deg");
+        card.style.setProperty("--rx", (-y * 7).toFixed(2) + "deg");
+      });
+      card.addEventListener("pointerleave", function () {
+        card.classList.remove("tilting");
+        card.style.setProperty("--ry", "0deg"); card.style.setProperty("--rx", "0deg");
+      });
+    });
+  }
+
+  // Count-up for "1,000+" and "70+" style numbers
+  if ("IntersectionObserver" in window && motionOK) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        var el = en.target, end = +el.dataset.count, suffix = el.dataset.suffix, t0 = performance.now();
+        (function tick(now) {
+          var t = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(end * e).toLocaleString("en-US") + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }, { threshold: 0.6 });
+    $$(".stat strong").forEach(function (el) {
+      var m = /^([\d,]+)(\+)$/.exec(el.textContent.trim());
+      if (!m) return;
+      el.dataset.count = m[1].replace(/,/g, ""); el.dataset.suffix = m[2];
+      el.setAttribute("aria-label", el.textContent.trim());
+      el.textContent = "0" + m[2];
+      cio.observe(el);
+    });
+  }
 
   /* ---------- 5. Slot inspector: add ?media=1 to the URL ---------- */
   if (/[?&]media=1/.test(location.search)) {

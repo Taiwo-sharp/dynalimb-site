@@ -27,6 +27,17 @@ window.DYNALIMB_MEDIA = {
     }
   },
 
+  /* FROM SCAN TO STEP (3D section) -----------------------------------------
+     model = compact socket mesh converted from a DynaX STL (simplified, ~260 KB)
+     clips = small looping videos shown beside step 1 and step 2              */
+  process: {
+    model: "media/models/socket.bin",
+    clips: [
+      { webm: "media/dynax-scan.webm",   mp4: "media/dynax-scan.mp4",   poster: "media/dynax-scan-poster.webp" },
+      { webm: "media/dynax-socket.webm", mp4: "media/dynax-socket.mp4", poster: "media/dynax-socket-poster.webp" }
+    ]
+  },
+
   /* IMAGES ----------------------------------------------------------------
      key: { src: path, alt: description for screen readers, size: recommended,
             position: optional focus point when the photo is cropped to fit,
