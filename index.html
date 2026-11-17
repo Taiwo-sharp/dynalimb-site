@@ -51,6 +51,56 @@
 
 <main id="main">
 
+<!-- ============ FROM SCAN TO STEP (scroll-driven 3D) ============ -->
+<section class="process" id="process" aria-labelledby="process-title">
+  <div class="process-sticky">
+    <div class="process-glow" aria-hidden="true"></div>
+    <canvas class="process-canvas" aria-hidden="true"></canvas>
+    <div class="process-labels" aria-hidden="true"></div>
+
+    <div class="container process-ui">
+      <header class="process-head">
+        <p class="eyebrow eyebrow-light">From scan to step</p>
+        <h2 id="process-title" class="h2 h2-light">How a Dynalimb socket is made</h2>
+      </header>
+
+      <ol class="process-steps">
+        <li class="pstep is-active" data-step="0">
+          <span class="pstep-num">01</span>
+          <h3>Scan</h3>
+          <p>Scanned on a phone, in minutes. No plaster casts. The scan goes straight into DynaX, where it is cleaned up and prepared.</p>
+        </li>
+        <li class="pstep" data-step="1">
+          <span class="pstep-num">02</span>
+          <h3>Design in DynaX</h3>
+          <p>Trimlines, fit adjustments and wall thickness are set digitally, then the socket is connected to standard prosthetic components.</p>
+        </li>
+        <li class="pstep" data-step="2">
+          <span class="pstep-num">03</span>
+          <h3>Print</h3>
+          <p>3D printed locally, layer by layer, ready for fitting.</p>
+        </li>
+      </ol>
+
+      <div class="process-rail" aria-hidden="true"><span></span><span></span><span></span></div>
+
+      <figure class="process-clip" data-step="0">
+        <video muted loop playsinline preload="none" aria-hidden="true"></video>
+        <figcaption>A real scan being cleaned up in DynaX</figcaption>
+      </figure>
+      <figure class="process-clip" data-step="1">
+        <video muted loop playsinline preload="none" aria-hidden="true"></video>
+        <figcaption>Connecting the socket to components in DynaX</figcaption>
+      </figure>
+
+      <button class="media-toggle process-toggle" type="button" aria-pressed="false" aria-label="Pause animation">
+        <svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1"/><rect x="9.4" y="3" width="2.6" height="10" rx="1"/></svg>
+        <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- ============ HERO (video) ============ -->
 <section class="hero" aria-labelledby="hero-title">
   <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="media/placeholders/hero-poster.svg" aria-hidden="true">
@@ -141,56 +191,6 @@
         </div>
         <img data-media="service-digital" src="media/placeholders/service-digital.svg" alt="" loading="lazy">
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FROM SCAN TO STEP (scroll-driven 3D) ============ -->
-<section class="process" id="process" aria-labelledby="process-title">
-  <div class="process-sticky">
-    <div class="process-glow" aria-hidden="true"></div>
-    <canvas class="process-canvas" aria-hidden="true"></canvas>
-    <div class="process-labels" aria-hidden="true"></div>
-
-    <div class="container process-ui">
-      <header class="process-head">
-        <p class="eyebrow eyebrow-light">From scan to step</p>
-        <h2 id="process-title" class="h2 h2-light">How a Dynalimb socket is made</h2>
-      </header>
-
-      <ol class="process-steps">
-        <li class="pstep is-active" data-step="0">
-          <span class="pstep-num">01</span>
-          <h3>Scan</h3>
-          <p>Scanned on a phone, in minutes. No plaster casts. The scan goes straight into DynaX, where it is cleaned up and prepared.</p>
-        </li>
-        <li class="pstep" data-step="1">
-          <span class="pstep-num">02</span>
-          <h3>Design in DynaX</h3>
-          <p>Trimlines, fit adjustments and wall thickness are set digitally, then the socket is connected to standard prosthetic components.</p>
-        </li>
-        <li class="pstep" data-step="2">
-          <span class="pstep-num">03</span>
-          <h3>Print</h3>
-          <p>3D printed locally, layer by layer, ready for fitting.</p>
-        </li>
-      </ol>
-
-      <div class="process-rail" aria-hidden="true"><span></span><span></span><span></span></div>
-
-      <figure class="process-clip" data-step="0">
-        <video muted loop playsinline preload="none" aria-hidden="true"></video>
-        <figcaption>A real scan being cleaned up in DynaX</figcaption>
-      </figure>
-      <figure class="process-clip" data-step="1">
-        <video muted loop playsinline preload="none" aria-hidden="true"></video>
-        <figcaption>Connecting the socket to components in DynaX</figcaption>
-      </figure>
-
-      <button class="media-toggle process-toggle" type="button" aria-pressed="false" aria-label="Pause animation">
-        <svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1"/><rect x="9.4" y="3" width="2.6" height="10" rx="1"/></svg>
-        <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg>
-      </button>
     </div>
   </div>
 </section>

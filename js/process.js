@@ -283,6 +283,7 @@ async function startScene({ progress, isPaused, reduce }) {
   const ease = t => t * t * (3 - 2 * t);
   let shown = reduce ? 1 : progress();
   let idle = 0, last = performance.now(), running = false;
+  const introStart = performance.now();   // opening sweep on first view, before any scrolling
 
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
@@ -291,7 +292,8 @@ async function startScene({ progress, isPaused, reduce }) {
     const p = shown;
     if (!isPaused()) idle += dt * 0.12;
 
-    const scan = ease(ramp(p, 0.02, 0.30));
+    const intro = reduce ? 0 : ease(Math.min(1, (now - introStart) / 3000)) * 0.45;
+    const scan = Math.max(ease(ramp(p, 0.02, 0.30)), intro);
     pMat.uniforms.uScan.value = scan;
     pMat.uniforms.uFade.value = 1 - ramp(p, 0.36, 0.48);
     points.visible = pMat.uniforms.uFade.value > 0.01;

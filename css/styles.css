@@ -127,7 +127,7 @@ h1,h2,h3,h4,p{margin:0}
 .card-green img{height:350px}
 
 /* From scan to step (pinned, scroll-driven 3D) */
-.process{position:relative;height:420vh;background:#050a24;color:#fff;margin-top:40px}
+.process{position:relative;height:420vh;background:#050a24;color:#fff}
 .process-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .process-glow{position:absolute;inset:0;background:
   radial-gradient(60% 55% at 66% 52%,rgba(21,201,208,.16),transparent 70%),
