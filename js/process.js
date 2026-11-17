@@ -1,12 +1,19 @@
 /* =========================================================
-   "From scan to step" — scroll-driven 3D socket
+   "From scan to step" — scroll-driven 3D socket (opens the page)
    Act 1 (scan):   points sweep into the socket shape
    Act 2 (design): wireframe, trimline and measured circumferences
-   Act 3 (print):  solid socket built layer by layer, then turns
+   Act 3 (print):  solid socket built layer by layer
+   Act 4 (walk):   pylon + Macy Foot attach, the finished leg walks
    three.js is only downloaded when the section comes near the viewport.
    ========================================================= */
+import { loadMesh, topPoint } from "./mesh.js";
+
 const section = document.getElementById("process");
 const M = (window.DYNALIMB_MEDIA || {}).process || {};
+
+// Scroll timeline: acts 1-3 use the first 75%, act 4 the rest
+const P3 = 0.75;
+const stepFor = p => (p >= P3 ? 3 : p / P3 < 0.34 ? 0 : p / P3 < 0.66 ? 1 : 2);
 
 if (section) init();
 
@@ -16,6 +23,7 @@ function init() {
   const clips = [...section.querySelectorAll(".process-clip")];
   const toggle = section.querySelector(".process-toggle");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const lastStep = steps.length - 1;
   let paused = reduce;
   let activeStep = -1;
 
@@ -56,18 +64,17 @@ function init() {
     const total = section.offsetHeight - innerHeight;
     return total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
   }
-  const stepFor = p => (p < 0.34 ? 0 : p < 0.66 ? 1 : 2);
 
   let inView = false;
   new IntersectionObserver(([e]) => {
     inView = e.isIntersecting;
     if (!inView) clips.forEach(f => f.querySelector("video") && f.querySelector("video").pause());
-    else { activeStep = -1; setStep(reduce ? 2 : stepFor(progress())); }
+    else { activeStep = -1; setStep(reduce ? lastStep : stepFor(progress())); }
   }).observe(section);
 
   if (!reduce) addEventListener("scroll", () => { const p = progress(); setIntro(p < 0.05); setStep(stepFor(p)); }, { passive: true });
   setIntro(!reduce && progress() < 0.05);
-  setStep(reduce ? 2 : stepFor(progress()));
+  setStep(reduce ? lastStep : stepFor(progress()));
 
   toggle.addEventListener("click", () => {
     paused = !paused;
@@ -77,7 +84,7 @@ function init() {
   });
   if (reduce) toggle.hidden = true;
 
-  // Load three.js + the model only when the section is within a screen of view
+  // Load three.js + the models only when the section is within a screen of view
   const near = new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return;
     near.disconnect();
@@ -106,32 +113,21 @@ async function startScene({ progress, isPaused, reduce }) {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0x050a24, 6, 13);
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 60);
 
-  /* ---------- Model ---------- */
-  const buf = await fetch(M.model).then(r => { if (!r.ok) throw new Error("model " + r.status); return r.arrayBuffer(); });
-  const dv = new DataView(buf);
-  const n = dv.getUint32(0, true), ic = dv.getUint32(4, true);
-  const size = [dv.getFloat32(8, true), dv.getFloat32(12, true), dv.getFloat32(16, true)];
-  const q = new Int16Array(buf, 20, n * 3);
-  let off = 20 + n * 6; if (off % 4) off += 4 - (off % 4);
-  const index = n < 65536 ? new Uint16Array(buf, off, ic) : new Uint32Array(buf, off, ic);
-
-  const H = 3.0;                          // model height in scene units
-  const s = H / size[2];                  // scene units per mm
-  const pos = new Float32Array(n * 3);
-  for (let v = 0; v < n; v++) {           // STL Z-up -> three Y-up
-    const x = q[v * 3] / 32767 * size[0] / 2, y = q[v * 3 + 1] / 32767 * size[1] / 2, z = q[v * 3 + 2] / 32767 * size[2] / 2;
-    pos[v * 3] = x * s; pos[v * 3 + 1] = z * s; pos[v * 3 + 2] = -y * s;
-  }
-  const geom = new THREE.BufferGeometry();
-  geom.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  geom.setIndex(new THREE.BufferAttribute(index, 1));
-  geom.computeVertexNormals();
+  /* ---------- Models (same mm scale for socket and foot) ---------- */
+  const sock = await loadMesh(THREE, M.model, 1);       // scale fixed below once size is known
+  const H = 3.0, s = H / sock.sizeMM[2];                  // socket height = 3 scene units
+  sock.geometry.scale(s, s, s);
+  const pos = sock.positions;                             // scaled in place by geometry.scale
+  const n = sock.count;
+  const geom = sock.geometry;
   const minY = -H / 2, maxY = H / 2;
 
-  const group = new THREE.Group();
-  scene.add(group);
+  // Pivot at the top of the socket (the knee) so the finished leg can swing
+  const group = new THREE.Group(); scene.add(group);
+  const rig = new THREE.Group(); rig.position.y = maxY; group.add(rig);
+  const inner = new THREE.Group(); inner.position.y = -maxY; rig.add(inner);
   const TEAL = new THREE.Color(0x15c9d0);
 
   /* Act 1: point cloud that sweeps into shape */
@@ -173,21 +169,19 @@ async function startScene({ progress, isPaused, reduce }) {
       }`
   });
   const points = new THREE.Points(pGeom, pMat);
-  group.add(points);
+  inner.add(points);
 
-  // Scanner sweep ring
   const sweep = new THREE.Mesh(
     new THREE.RingGeometry(0.78, 0.84, 96),
     new THREE.MeshBasicMaterial({ color: TEAL, transparent: true, opacity: 0, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false })
   );
   sweep.rotation.x = -Math.PI / 2;
-  group.add(sweep);
+  inner.add(sweep);
 
   /* Act 2: wireframe, trimline, measured circumferences */
   const wire = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({ color: TEAL, wireframe: true, transparent: true, opacity: 0, depthWrite: false }));
-  group.add(wire);
+  inner.add(wire);
 
-  // Trimline: highest vertex in each angular bucket around the long axis
   const B = 160, top = new Array(B).fill(null);
   for (let v = 0; v < n; v++) {
     const x = pos[v * 3], y = pos[v * 3 + 1], z = pos[v * 3 + 2];
@@ -195,7 +189,7 @@ async function startScene({ progress, isPaused, reduce }) {
     if (!top[b] || y > top[b][1]) top[b] = [x, y, z];
   }
   const rim = top.filter(Boolean);
-  const rimPts = rim.map((p, i) => {          // light smoothing
+  const rimPts = rim.map((p, i) => {
     const a = rim[(i - 1 + rim.length) % rim.length], c = rim[(i + 1) % rim.length];
     return new THREE.Vector3((a[0] + 2 * p[0] + c[0]) / 4 * 1.02, (a[1] + 2 * p[1] + c[1]) / 4 + 0.01, (a[2] + 2 * p[2] + c[2]) / 4 * 1.02);
   });
@@ -203,9 +197,8 @@ async function startScene({ progress, isPaused, reduce }) {
   const trimGeom = new THREE.BufferGeometry().setFromPoints(rimPts);
   const trim = new THREE.Line(trimGeom, new THREE.LineBasicMaterial({ color: 0x7ff6fa, transparent: true, opacity: 0 }));
   trimGeom.setDrawRange(0, 0);
-  group.add(trim);
+  inner.add(trim);
 
-  // Circumference rings at two heights, measured from the real mesh
   function ringAt(frac) {
     const y0 = minY + H * frac, band = H * 0.012, RB = 72, rad = new Array(RB).fill(0);
     for (let v = 0; v < n; v++) {
@@ -220,7 +213,7 @@ async function startScene({ progress, isPaused, reduce }) {
     pts.push(pts[0].clone());
     const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 0.05, gapSize: 0.035, transparent: true, opacity: 0 }));
     line.computeLineDistances();
-    group.add(line);
+    inner.add(line);
     const anchor = pts.reduce((a, b) => (b.x > a.x ? b : a));
     const label = document.createElement("span");
     label.className = "process-label";
@@ -248,15 +241,53 @@ async function startScene({ progress, isPaused, reduce }) {
         totalEmissiveRadiance += vec3(0.08, 0.79, 0.82) * edge * uPrinting * 1.6;`);
   };
   const solid = new THREE.Mesh(geom, solidMat);
-  group.add(solid);
+  inner.add(solid);
 
-  // Glowing "nozzle" ring at the print height
   const nozzle = new THREE.Mesh(
     new THREE.RingGeometry(0.0, 0.7, 64),
     new THREE.MeshBasicMaterial({ color: TEAL, transparent: true, opacity: 0, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false })
   );
   nozzle.rotation.x = -Math.PI / 2;
   group.add(nozzle);
+
+  /* Act 4: pylon + Macy Foot, then walking */
+  const pylonLen = 170 * s, pylonR = 15 * s;
+  const pylon = new THREE.Mesh(
+    new THREE.CylinderGeometry(pylonR, pylonR, pylonLen, 32),
+    new THREE.MeshStandardMaterial({ color: 0xb8c2cc, metalness: 0.9, roughness: 0.28 })
+  );
+  pylon.position.y = minY - pylonLen / 2;
+  pylon.visible = false;
+  inner.add(pylon);
+
+  let foot = null, footHome = new THREE.Vector3(), toeDir = 1, floorY = minY - pylonLen - 1;
+  if (M.foot) {
+    try {
+      const f = await loadMesh(THREE, M.foot, s);
+      const tp = topPoint(f.positions, f.count);             // pyramid adapter
+      // Toe points away from the adapter along the foot's length (Z)
+      toeDir = tp.z > 0 ? -1 : 1;
+      foot = new THREE.Mesh(f.geometry, new THREE.MeshStandardMaterial({ color: 0x1b1d22, roughness: 0.45, metalness: 0.1, transparent: true }));
+      footHome.set(-tp.x, minY - pylonLen - tp.y, -tp.z);
+      foot.position.copy(footHome);
+      foot.visible = false;
+      inner.add(foot);
+      f.geometry.computeBoundingBox();
+      floorY = footHome.y + f.geometry.boundingBox.min.y;
+    } catch (e) { console.warn("[process] foot model unavailable:", e); }
+  }
+
+  // Treadmill floor: a grid that scrolls under the walking leg
+  const grid = new THREE.GridHelper(40, 80, 0x15c9d0, 0x15c9d0);
+  grid.material.transparent = true; grid.material.opacity = 0; grid.material.depthWrite = false;
+  grid.position.y = floorY - 0.01;
+  scene.add(grid);
+  const floorGlow = new THREE.Mesh(
+    new THREE.CircleGeometry(1.6, 64),
+    new THREE.MeshBasicMaterial({ color: TEAL, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false })
+  );
+  floorGlow.rotation.x = -Math.PI / 2; floorGlow.position.y = floorY;
+  scene.add(floorGlow);
 
   /* Lights */
   scene.add(new THREE.HemisphereLight(0xbfe9ff, 0x0a1342, 0.9));
@@ -273,7 +304,6 @@ async function startScene({ progress, isPaused, reduce }) {
     mobile = W < 900;
     renderer.setSize(W, Hh, false);
     camera.aspect = W / Hh;
-    // Push the model right on desktop (text sits left), up on phones (text sits below)
     camera.updateProjectionMatrix();
   }
   addEventListener("resize", resize);
@@ -282,21 +312,25 @@ async function startScene({ progress, isPaused, reduce }) {
   /* Animation */
   const ramp = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
   const ease = t => t * t * (3 - 2 * t);
+  const lerp = (a, b, t) => a + (b - a) * t;
   let shown = reduce ? 1 : progress();
-  let idle = 0, last = performance.now(), running = false, lift = 0;
-  const introStart = performance.now();   // opening sweep on first view, before any scrolling
+  let idle = 0, gaitT = 0, last = performance.now(), running = false, lift = 0;
+  const introStart = performance.now();
 
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     const target = reduce ? 1 : progress();
-    shown += (target - shown) * Math.min(1, dt * 6);     // damped, cinematic catch-up
-    const p = shown;
-    // Frame the model: right of the text on desktop; on phones, high while the intro text is up
-    lift += (((mobile && p < 0.05) ? 0.24 : -0.03) - lift) * Math.min(1, dt * 4);
-    if (mobile) camera.setViewOffset(W, Hh, 0, Hh * lift, W, Hh);
-    else camera.setViewOffset(W, Hh, -W * 0.17, 0, W, Hh);
+    shown += (target - shown) * Math.min(1, dt * 6);
+    const pAll = shown;
+    const p = Math.min(1, pAll / P3);                     // acts 1-3 timeline
+    const w = ramp(pAll, P3 + 0.01, 0.97);               // act 4 timeline
     if (!isPaused()) idle += dt * 0.12;
 
+    lift += ((!mobile ? 0 : pAll < 0.05 ? 0.24 : pAll >= P3 ? 0.16 : -0.03) - lift) * Math.min(1, dt * 4);
+    if (mobile) camera.setViewOffset(W, Hh, 0, Hh * lift, W, Hh);
+    else camera.setViewOffset(W, Hh, -W * 0.17, 0, W, Hh);
+
+    // Act 1
     const intro = reduce ? 0 : ease(Math.min(1, (now - introStart) / 3000)) * 0.45;
     const scan = Math.max(ease(ramp(p, 0.02, 0.30)), intro);
     pMat.uniforms.uScan.value = scan;
@@ -305,18 +339,19 @@ async function startScene({ progress, isPaused, reduce }) {
     sweep.position.y = maxY - (maxY - minY) * scan;
     sweep.material.opacity = scan > 0 && scan < 1 ? 0.85 : 0;
 
+    // Act 2
     wire.material.opacity = ramp(p, 0.32, 0.42) * 0.13 - ramp(p, 0.70, 0.80) * 0.06 - ramp(p, 0.90, 0.97) * 0.07;
     wire.visible = wire.material.opacity > 0.005;
-
     const tr = ramp(p, 0.42, 0.56);
     trimGeom.setDrawRange(0, Math.floor(rimPts.length * tr));
     trim.material.opacity = tr > 0 ? 1 - ramp(p, 0.74, 0.82) : 0;
-
+    trim.visible = trim.material.opacity > 0.01;
     const ringOn = ramp(p, 0.50, 0.58) * (1 - ramp(p, 0.68, 0.74));
-    rings.forEach(r => { r.line.material.opacity = ringOn; r.label.style.opacity = ringOn; });
+    rings.forEach(r => { r.line.material.opacity = ringOn; r.line.visible = ringOn > 0.01; r.label.style.opacity = ringOn; });
 
+    // Act 3
     const pr = ramp(p, 0.68, 0.94);
-    const cy = minY - 0.02 + (H + 0.04) * ease(pr);
+    const cy = pr >= 1 ? 100 : minY - 0.02 + (H + 0.04) * ease(pr);
     clip.constant = cy;
     shaderRef.uClipY.value = cy;
     shaderRef.uPrinting.value = pr > 0 && pr < 1 ? 1 : 0;
@@ -324,19 +359,44 @@ async function startScene({ progress, isPaused, reduce }) {
     nozzle.position.y = cy;
     nozzle.material.opacity = pr > 0 && pr < 1 ? 0.22 : 0;
 
-    // Camera: slow orbit + gentle descent through the acts
-    const ang = -0.7 + p * 2.4 + idle;
-    const elev = 0.55 - p * 0.35;
-    const dist = (mobile ? 14 : 9.4) - ease(ramp(p, 0.3, 0.6)) * 0.8;
-    scene.fog.near = dist - 2; scene.fog.far = dist + 6;
-    camera.position.set(Math.sin(ang) * dist, elev * dist * 0.5, Math.cos(ang) * dist);
-    camera.lookAt(0, 0, 0);
+    // Act 4: assemble, then walk
+    const asm = ease(ramp(w, 0, 0.4));
+    pylon.visible = asm > 0;
+    pylon.scale.y = Math.max(0.001, ease(ramp(w, 0, 0.2)));
+    pylon.position.y = minY - pylonLen * pylon.scale.y / 2;
+    if (foot) {
+      const fIn = ease(ramp(w, 0.12, 0.4));
+      foot.visible = fIn > 0;
+      foot.position.set(footHome.x, footHome.y - (1 - fIn) * 1.2, footHome.z);
+      foot.material.opacity = fIn;
+    }
+    const walkAmp = ease(ramp(w, 0.4, 0.62));
+    if (walkAmp > 0 && !isPaused()) gaitT += dt * 1.6;
+    const swing = Math.sin(gaitT * Math.PI) * 0.32 * walkAmp;
+    rig.rotation.x = swing * toeDir;
+    if (foot) foot.rotation.x = -swing * toeDir * 0.75;   // keep the sole near flat to the floor
+    const floorOn = ramp(w, 0.3, 0.55);
+    grid.material.opacity = floorOn * 0.22;
+    floorGlow.material.opacity = floorOn * 0.12;
+    if (walkAmp > 0 && !isPaused()) grid.position.z = ((grid.position.z - toeDir * dt * 0.9 * walkAmp) % 0.5 + 0.5) % 0.5 - 0.25;
+
+    // Camera: orbit through acts 1-3, then swing round to a side view for the walk
+    const ang3 = -0.7 + p * 2.4 + idle;
+    const side = Math.atan2(1, 0) + (toeDir > 0 ? 0 : Math.PI) - 0.35;  // profile, slightly three-quarter
+    const camW = ease(ramp(w, 0.05, 0.45));
+    const ang = lerp(ang3, side + Math.sin(idle * 0.6) * 0.15, camW);
+    const elev = lerp(0.55 - p * 0.35, 0.12, camW);
+    let dist = (mobile ? 14 : 9.4) - ease(ramp(p, 0.3, 0.6)) * 0.8;
+    dist = lerp(dist, mobile ? 19 : 14, camW);
+    const lookY = lerp(0, (floorY + maxY) / 2 + 0.25, camW);
+    scene.fog.near = dist - 2; scene.fog.far = dist + 7;
+    camera.position.set(Math.sin(ang) * dist, lookY + elev * dist * 0.5, Math.cos(ang) * dist);
+    camera.lookAt(0, lookY, 0);
 
     renderer.render(scene, camera);
 
-    // Pin measurement labels to their rings
     if (ringOn > 0.01) rings.forEach(r => {
-      v3.copy(r.anchor).applyMatrix4(group.matrixWorld).project(camera);
+      v3.copy(r.anchor).applyMatrix4(inner.matrixWorld).project(camera);
       const lx = Math.min((v3.x * 0.5 + 0.5) * W + 12, W - r.label.offsetWidth - 10);
       r.label.style.transform = `translate(${lx}px, ${(-v3.y * 0.5 + 0.5) * Hh - 10}px)`;
     });

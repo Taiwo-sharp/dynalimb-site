@@ -231,31 +231,6 @@
   var mt = $(".marquee-track");
   if (mt) { Array.prototype.slice.call(mt.children).forEach(function (li) { var c = li.cloneNode(true); c.setAttribute("aria-hidden", "true"); mt.appendChild(c); }); }
 
-  /* ---------- Macy Foot spotlight video: loads when near, plays only in view ---------- */
-  var macyV = $("#macyVideo"), macyBtn = $(".macy-toggle");
-  if (macyV && M.macy) {
-    var mReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var mPaused = mReduce, mLoaded = false, mInView = false;
-    if (M.macy.poster) macyV.poster = M.macy.poster;
-    function macyLoad() {
-      if (mLoaded) return; mLoaded = true;
-      [["video/mp4", M.macy.mp4], ["video/webm", M.macy.webm]].forEach(function (s) {
-        if (!s[1]) return;
-        var el = document.createElement("source"); el.type = s[0]; el.src = s[1]; macyV.appendChild(el);
-      });
-      macyV.load();
-    }
-    function macySync() {
-      if (mInView && !mPaused) { macyLoad(); var pp = macyV.play(); if (pp && pp.catch) pp.catch(function () {}); }
-      else macyV.pause();
-      setToggle(macyBtn, mPaused, "video");
-    }
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (en) { mInView = en[0].isIntersecting; macySync(); }, { rootMargin: "200px 0px" }).observe(macyV);
-    } else { mInView = true; macySync(); }
-    macyBtn.addEventListener("click", function () { mPaused = !mPaused; macySync(); });
-  }
-
   /* ---------- Cinematic touches ---------- */
   var motionOK = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   document.documentElement.classList.add("js");

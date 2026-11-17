@@ -27,8 +27,9 @@ window.DYNALIMB_MEDIA = {
     }
   },
 
-  /* MACY FOOT spotlight video (loops, no sound). mp4 listed first: it is the smaller file */
+  /* MACY FOOT spotlight: 3D model (drag to rotate) + film (loops, no sound; mp4 first, it is smaller) */
   macy: {
+    model:  "media/models/macy-foot.bin",
     mp4:    "media/macy-foot.mp4",
     webm:   "media/macy-foot.webm",
     poster: "media/macy-foot-poster.webp"
@@ -39,6 +40,7 @@ window.DYNALIMB_MEDIA = {
      clips = small looping videos shown beside step 1 and step 2              */
   process: {
     model: "media/models/socket.bin",
+    foot:  "media/models/macy-foot.bin",   // joins the socket in step 4 (walk)
     clips: [
       { webm: "media/dynax-scan.webm",   mp4: "media/dynax-scan.mp4",   poster: "media/dynax-scan-poster.webp" },
       { webm: "media/dynax-socket.webm", mp4: "media/dynax-socket.mp4", poster: "media/dynax-socket-poster.webp" }

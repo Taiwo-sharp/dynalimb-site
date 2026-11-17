@@ -92,9 +92,14 @@
           <h3>Print</h3>
           <p>3D printed locally, layer by layer, ready for fitting.</p>
         </li>
+        <li class="pstep" data-step="3">
+          <span class="pstep-num">04</span>
+          <h3>Walk</h3>
+          <p>Joined to a pylon and the Macy Foot, the finished leg is fitted, aligned and ready to walk.</p>
+        </li>
       </ol>
 
-      <div class="process-rail" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="process-rail" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 
       <figure class="process-clip" data-step="0">
         <video muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -205,12 +210,27 @@
 
 <!-- ============ MACY FOOT (product spotlight) ============ -->
 <section class="macy" id="macy" aria-labelledby="macy-title">
-  <video class="macy-video" id="macyVideo" muted loop playsinline preload="none" aria-hidden="true"></video>
-  <div class="macy-shade" aria-hidden="true"></div>
+  <div class="macy-stage">
+    <video class="macy-video" id="macyVideo" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <canvas class="macy-canvas" role="img" aria-label="3D model of the Macy Foot. Drag to rotate."></canvas>
+    <div class="macy-tabs" role="group" aria-label="View">
+      <button type="button" data-view="3d" aria-pressed="true">3D</button>
+      <button type="button" data-view="film" aria-pressed="false">Film</button>
+    </div>
+    <p class="macy-hint" aria-hidden="true">Drag to rotate</p>
+  </div>
   <div class="container macy-inner">
     <p class="eyebrow eyebrow-light">Innovation</p>
     <h2 id="macy-title" class="h2 h2-light">Meet the Macy Foot</h2>
     <p class="sub sub-light">A prosthetic foot designed by Dynalimb: water resistant, durable and flexible, in the colour you choose.</p>
+    <div class="macy-swatches" role="group" aria-label="Colour">
+      <button type="button" data-color="#1b1d22" aria-label="Black" aria-pressed="true"></button>
+      <button type="button" data-color="#d4141c" aria-label="Red" aria-pressed="false"></button>
+      <button type="button" data-color="#d6e01e" aria-label="Yellow" aria-pressed="false"></button>
+      <button type="button" data-color="#c81bd0" aria-label="Magenta" aria-pressed="false"></button>
+      <button type="button" data-color="#e6d2a6" aria-label="Sand" aria-pressed="false"></button>
+      <button type="button" data-color="#2a33e8" aria-label="Blue" aria-pressed="false"></button>
+    </div>
     <a class="btn btn-teal btn-lg" href="#contact">Ask about the Macy Foot</a>
   </div>
   <button class="media-toggle macy-toggle" type="button" aria-pressed="false" aria-label="Pause video">
@@ -398,5 +418,6 @@
 <script src="media/media.js"></script>
 <script src="js/main.js"></script>
 <script type="module" src="js/process.js"></script>
+<script type="module" src="js/macy3d.js"></script>
 </body>
 </html>
