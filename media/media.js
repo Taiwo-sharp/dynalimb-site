@@ -37,33 +37,34 @@ window.DYNALIMB_MEDIA = {
     "story-3":              { src: "media/story-3.webp", position: "50% 62%", alt: "Ankle-foot orthosis with a floral lining", size: "900×800" },
     "story-4":              { src: "media/story-4.webp", position: "50% 50%", alt: "Prosthetic socket held up in front of the Dynalimb Technologies sign", size: "900×800" },
 
-    "service-prosthetics":  { src: "media/placeholders/service-prosthetics.svg",  alt: "People wearing prosthetic legs",                  size: "960×560" },
-    "service-3d":           { src: "media/placeholders/service-3d.svg",           alt: "3D printer fabricating a device",                 size: "960×560" },
-    "service-clinical":     { src: "media/placeholders/service-clinical.svg",     alt: "Rehabilitation session with a physiotherapist",   size: "960×560" },
-    "service-digital":      { src: "media/placeholders/service-digital.svg",      alt: "Digital health and telehealth",                   size: "960×560" },
+    "service-prosthetics":  { src: "media/service-prosthetics.webp",  alt: "People wearing prosthetic legs",                  size: "960×560" },
+    "service-3d":           { src: "media/service-3d.webp",           alt: "3D printer fabricating a device",                 size: "960×560" },
+    "service-clinical":     { src: "media/service-clinical.webp",     alt: "Rehabilitation session with a physiotherapist",   size: "960×560" },
+    "service-digital":      { src: "media/service-digital.webp",      alt: "Digital health and telehealth",                   size: "960×560" },
 
-    "therapay-bg":          { src: "media/placeholders/therapay-bg.svg",          alt: "",                                                size: "1920×900" },
-    "impact-center":        { src: "media/placeholders/impact-center.svg",        alt: "A clinician using the DynaX tablet app",          size: "700×900" },
+    "therapay-bg":          { src: "media/therapay-bg.webp",          alt: "",                                                size: "1920×900" },
+    "impact-center":        { src: "media/impact-center.webp",        alt: "A clinician using the DynaX tablet app",          size: "700×900" },
 
-    "patient-1":            { src: "media/placeholders/patient-1.svg",            alt: "Patient training in a gym",                       size: "980×1000" },
-    "patient-2":            { src: "media/placeholders/patient-2.svg",            alt: "Patient walking with a prosthetic",               size: "980×1000" },
+    "patient-1":            { src: "media/patient-1.webp",            alt: "Patient training in a gym",                       size: "980×1000" },
+    "patient-2":            { src: "media/placeholders/patient-2.svg", alt: "Patient walking with a prosthetic",              size: "980×1000" },
 
-    "contact-patients":     { src: "media/placeholders/contact-patients.svg",     alt: "",                                                size: "960×480" },
-    "contact-orgs":         { src: "media/placeholders/contact-orgs.svg",         alt: "",                                                size: "960×480" },
-    "footer-photo":         { src: "media/placeholders/footer-photo.svg",         alt: "Two healthcare professionals",                    size: "820×860" },
+    /* The design uses the same photo for both contact cards */
+    "contact-patients":     { src: "media/contact.webp",              alt: "",                                                size: "960×480" },
+    "contact-orgs":         { src: "media/contact.webp",              alt: "",                                                size: "960×480" },
+    "footer-photo":         { src: "media/footer-photo.webp",         alt: "Two healthcare professionals",                    size: "820×860" },
 
     /* Partner logos (4 large cards) — transparent PNG/SVG works best */
-    "partner-hello-tomorrow": { src: "media/placeholders/partner-hello-tomorrow.svg", alt: "Hello Tomorrow",          size: "400×200" },
-    "partner-super-parents":  { src: "media/placeholders/partner-super-parents.svg",  alt: "Super Parents Foundation", size: "400×200" },
-    "partner-faop":           { src: "media/placeholders/partner-faop.svg",           alt: "Florida Association of Orthotists & Prosthetists", size: "400×200" },
-    "partner-utsw":           { src: "media/placeholders/partner-utsw.svg",           alt: "UT Southwestern Medical Center", size: "400×200" },
+    "partner-hello-tomorrow": { src: "media/logos/partner-hello-tomorrow.webp", alt: "Hello Tomorrow",          size: "400×200" },
+    "partner-super-parents":  { src: "media/logos/partner-super-parents.webp",  alt: "Super Parents Foundation", size: "400×200" },
+    "partner-faop":           { src: "media/logos/partner-faop.webp",           alt: "Florida Association of Orthotists & Prosthetists", size: "400×200" },
+    "partner-utsw":           { src: "media/logos/partner-utsw.webp",           alt: "UT Southwestern Medical Center", size: "400×200" },
 
     /* "Selected collaborations" strip (small logos) */
-    "collab-irede":         { src: "media/placeholders/collab-irede.svg",         alt: "iREDE Foundation",                                size: "300×100" },
-    "collab-fmc-asaba":     { src: "media/placeholders/collab-fmc-asaba.svg",     alt: "Federal Medical Centre Asaba",                    size: "300×100" },
-    "collab-luth":          { src: "media/placeholders/collab-luth.svg",          alt: "Lagos University Teaching Hospital",              size: "300×100" },
-    "collab-nbhil":         { src: "media/placeholders/collab-nbhil.svg",         alt: "NBHIL",                                           size: "300×100" },
-    "collab-kiri":          { src: "media/placeholders/collab-kiri.svg",          alt: "KIRI Engine",                                     size: "300×100" }
+    "collab-irede":         { src: "media/logos/collab-irede.webp",     alt: "iREDE Foundation",                                size: "300×100" },
+    "collab-fmc-asaba":     { src: "media/logos/collab-fmc-asaba.webp", alt: "Federal Medical Centre Asaba",                    size: "300×100" },
+    "collab-luth":          { src: "media/logos/collab-luth.webp",      alt: "Lagos University Teaching Hospital",              size: "300×100" },
+    "collab-nbhil":         { src: "media/logos/collab-nbhil.webp",     alt: "NBHIL",                                           size: "300×100" },
+    "collab-kiri":          { src: "media/logos/collab-kiri.webp",      alt: "KIRI Engine",                                     size: "300×100" }
   },
 
   /* PATIENT STORY CARDS — edit text here. type "quote" = text card, "photo" = image card.
