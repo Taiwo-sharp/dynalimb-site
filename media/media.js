@@ -19,7 +19,7 @@ window.DYNALIMB_MEDIA = {
   hero: {
     mp4:    "media/hero-court.mp4",
     webm:   "",
-    poster: "media/hero-poster.webp",
+    poster: "media/hero-court-poster.webp",
     mobile: {
       mp4:    "",
       webm:   "",
