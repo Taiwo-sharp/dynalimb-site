@@ -17,9 +17,9 @@ window.DYNALIMB_MEDIA = {
      mobile = optional portrait version for phones (portrait screens up to 900px wide);
               leave its fields "" to use the main video everywhere            */
   hero: {
-    mp4:    "media/hero-court.mp4",
+    mp4:    "media/hero-court-v2.mp4",
     webm:   "",
-    poster: "media/hero-court-poster.webp",
+    poster: "media/hero-court-v2-poster.webp",
     mobile: {
       mp4:    "",
       webm:   "",
