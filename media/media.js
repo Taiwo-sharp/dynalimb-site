@@ -18,12 +18,12 @@ window.DYNALIMB_MEDIA = {
               leave its fields "" to use the main video everywhere            */
   hero: {
     mp4:    "media/hero.mp4",
-    webm:   "media/hero.webm",
+    webm:   "",
     poster: "media/hero-poster.webp",
     mobile: {
-      mp4:    "media/hero-mobile.mp4",
-      webm:   "media/hero-mobile.webm",
-      poster: "media/hero-mobile-poster.webp"
+      mp4:    "",
+      webm:   "",
+      poster: ""
     }
   },
 
