@@ -1,5 +1,5 @@
-/* ==========================================================================
-   DYNALIMB MEDIA MANIFEST  —  the only file you edit to swap images / video
+﻿/* ==========================================================================
+   DYNALIMB MEDIA MANIFEST  â€”  the only file you edit to swap images / video
    --------------------------------------------------------------------------
    1. Put your real file in the /media folder (e.g. media/hero.mp4, media/story-1.jpg)
    2. Change the matching "src" below to that path.
@@ -17,7 +17,7 @@ window.DYNALIMB_MEDIA = {
      mobile = optional portrait version for phones (portrait screens up to 900px wide);
               leave its fields "" to use the main video everywhere            */
   hero: {
-    mp4:    "media/hero.mp4",
+    mp4:    "media/hero-court.mp4",
     webm:   "",
     poster: "media/hero-poster.webp",
     mobile: {
@@ -52,47 +52,47 @@ window.DYNALIMB_MEDIA = {
             position: optional focus point when the photo is cropped to fit,
                       "50% 0%" = keep the top, "50% 100%" = keep the bottom } */
   images: {
-    "story-1":              { src: "media/story-1.webp", position: "50% 80%", alt: "Patient with a prosthetic leg standing in a doorway beside a Dynalimb clinician", size: "900×800" },
-    "story-2":              { src: "media/story-2.webp", position: "50% 85%", alt: "Prosthetic foot in a white clog beside the patient's other foot", size: "1200×800" },
-    "story-3":              { src: "media/story-3.webp", position: "50% 62%", alt: "Ankle-foot orthosis with a floral lining", size: "900×800" },
-    "story-4":              { src: "media/story-4.webp", position: "50% 50%", alt: "Prosthetic socket held up in front of the Dynalimb Technologies sign", size: "900×800" },
-    "story-5":              { src: "media/story-5.webp", position: "50% 70%", alt: "Patient wearing a black prosthetic leg with trainers beside a car", size: "900×800" },
-    "story-6":              { src: "media/story-6.webp", position: "50% 60%", alt: "Prosthetic leg on a staircase", size: "900×800" },
-    "story-7":              { src: "media/story-7.webp", position: "50% 50%", alt: "Patterned ankle-foot orthosis held in a hand", size: "900×800" },
-    "story-8":              { src: "media/story-8.webp", position: "50% 55%", alt: "Close-up of a skin-tone prosthetic socket being fitted", size: "900×800" },
-    "story-9":              { src: "media/story-9.webp", position: "50% 60%", alt: "Black socket being 3D printed", size: "900×800" },
+    "story-1":              { src: "media/story-1.webp", position: "50% 80%", alt: "Patient with a prosthetic leg standing in a doorway beside a Dynalimb clinician", size: "900Ã—800" },
+    "story-2":              { src: "media/story-2.webp", position: "50% 85%", alt: "Prosthetic foot in a white clog beside the patient's other foot", size: "1200Ã—800" },
+    "story-3":              { src: "media/story-3.webp", position: "50% 62%", alt: "Ankle-foot orthosis with a floral lining", size: "900Ã—800" },
+    "story-4":              { src: "media/story-4.webp", position: "50% 50%", alt: "Prosthetic socket held up in front of the Dynalimb Technologies sign", size: "900Ã—800" },
+    "story-5":              { src: "media/story-5.webp", position: "50% 70%", alt: "Patient wearing a black prosthetic leg with trainers beside a car", size: "900Ã—800" },
+    "story-6":              { src: "media/story-6.webp", position: "50% 60%", alt: "Prosthetic leg on a staircase", size: "900Ã—800" },
+    "story-7":              { src: "media/story-7.webp", position: "50% 50%", alt: "Patterned ankle-foot orthosis held in a hand", size: "900Ã—800" },
+    "story-8":              { src: "media/story-8.webp", position: "50% 55%", alt: "Close-up of a skin-tone prosthetic socket being fitted", size: "900Ã—800" },
+    "story-9":              { src: "media/story-9.webp", position: "50% 60%", alt: "Black socket being 3D printed", size: "900Ã—800" },
 
-    "service-prosthetics":  { src: "media/service-prosthetics.webp", position: "50% 70%", alt: "Prosthetic leg with a patterned socket in the Dynalimb studio", size: "960×560" },
-    "service-3d":           { src: "media/service-3d.webp", position: "50% 55%", alt: "Prosthetic socket on a 3D printer bed", size: "960×560" },
-    "service-clinical":     { src: "media/service-clinical.webp", position: "50% 55%", alt: "Patient standing on a fitted prosthetic leg", size: "960×560" },
-    "service-digital":      { src: "media/service-digital.webp", position: "50% 45%", alt: "Clinician 3D scanning with DynaX on a laptop", size: "960×560" },
+    "service-prosthetics":  { src: "media/service-prosthetics.webp", position: "50% 70%", alt: "Prosthetic leg with a patterned socket in the Dynalimb studio", size: "960Ã—560" },
+    "service-3d":           { src: "media/service-3d.webp", position: "50% 55%", alt: "Prosthetic socket on a 3D printer bed", size: "960Ã—560" },
+    "service-clinical":     { src: "media/service-clinical.webp", position: "50% 55%", alt: "Patient standing on a fitted prosthetic leg", size: "960Ã—560" },
+    "service-digital":      { src: "media/service-digital.webp", position: "50% 45%", alt: "Clinician 3D scanning with DynaX on a laptop", size: "960Ã—560" },
 
-    "therapay-bg":          { src: "media/therapay-bg.webp",          alt: "",                                                size: "1920×900" },
-    "impact-center":        { src: "media/impact-center.webp",        alt: "A clinician using the DynaX tablet app",          size: "700×900" },
+    "therapay-bg":          { src: "media/therapay-bg.webp",          alt: "",                                                size: "1920Ã—900" },
+    "impact-center":        { src: "media/impact-center.webp",        alt: "A clinician using the DynaX tablet app",          size: "700Ã—900" },
 
-    "patient-1":            { src: "media/patient-1.webp", position: "50% 50%", alt: "Patient with a prosthetic leg sitting and talking on the phone", size: "980×1000" },
-    "patient-2":            { src: "media/patient-2.webp", position: "50% 75%", alt: "Patient standing on a black prosthetic leg", size: "980×1000" },
+    "patient-1":            { src: "media/patient-1.webp", position: "50% 50%", alt: "Patient with a prosthetic leg sitting and talking on the phone", size: "980Ã—1000" },
+    "patient-2":            { src: "media/patient-2.webp", position: "50% 75%", alt: "Patient standing on a black prosthetic leg", size: "980Ã—1000" },
 
-    "contact-patients":     { src: "media/contact-patients.webp", position: "50% 45%", alt: "Clinician adjusting a patient's prosthetic leg", size: "960×480" },
-    "contact-orgs":         { src: "media/contact-orgs.webp", position: "50% 35%", alt: "Finished prosthetic leg in the Dynalimb Technologies studio", size: "960×480" },
-    "footer-photo":         { src: "media/footer-photo.webp",         alt: "Two healthcare professionals",                    size: "820×860" },
+    "contact-patients":     { src: "media/contact-patients.webp", position: "50% 45%", alt: "Clinician adjusting a patient's prosthetic leg", size: "960Ã—480" },
+    "contact-orgs":         { src: "media/contact-orgs.webp", position: "50% 35%", alt: "Finished prosthetic leg in the Dynalimb Technologies studio", size: "960Ã—480" },
+    "footer-photo":         { src: "media/footer-photo.webp",         alt: "Two healthcare professionals",                    size: "820Ã—860" },
 
-    /* Partner logos (4 large cards) — transparent PNG/SVG works best */
-    "partner-hello-tomorrow": { src: "media/logos/partner-hello-tomorrow.webp", alt: "Hello Tomorrow",          size: "400×200" },
-    "partner-super-parents":  { src: "media/logos/partner-super-parents.webp",  alt: "Super Parents Foundation", size: "400×200" },
-    "partner-faop":           { src: "media/logos/partner-faop.webp",           alt: "Florida Association of Orthotists & Prosthetists", size: "400×200" },
-    "partner-utsw":           { src: "media/logos/partner-utsw.webp",           alt: "UT Southwestern Medical Center", size: "400×200" },
+    /* Partner logos (4 large cards) â€” transparent PNG/SVG works best */
+    "partner-hello-tomorrow": { src: "media/logos/partner-hello-tomorrow.webp", alt: "Hello Tomorrow",          size: "400Ã—200" },
+    "partner-super-parents":  { src: "media/logos/partner-super-parents.webp",  alt: "Super Parents Foundation", size: "400Ã—200" },
+    "partner-faop":           { src: "media/logos/partner-faop.webp",           alt: "Florida Association of Orthotists & Prosthetists", size: "400Ã—200" },
+    "partner-utsw":           { src: "media/logos/partner-utsw.webp",           alt: "UT Southwestern Medical Center", size: "400Ã—200" },
 
     /* "Selected collaborations" strip (small logos) */
-    "collab-irede":         { src: "media/logos/collab-irede.webp",     alt: "iREDE Foundation",                                size: "300×100" },
-    "collab-fmc-asaba":     { src: "media/logos/collab-fmc-asaba.webp", alt: "Federal Medical Centre Asaba",                    size: "300×100" },
-    "collab-luth":          { src: "media/logos/collab-luth.webp",      alt: "Lagos University Teaching Hospital",              size: "300×100" },
-    "collab-nbhil":         { src: "media/logos/collab-nbhil.webp",     alt: "NBHIL",                                           size: "300×100" },
-    "collab-kiri":          { src: "media/logos/collab-kiri.webp",      alt: "KIRI Engine",                                     size: "300×100" }
+    "collab-irede":         { src: "media/logos/collab-irede.webp",     alt: "iREDE Foundation",                                size: "300Ã—100" },
+    "collab-fmc-asaba":     { src: "media/logos/collab-fmc-asaba.webp", alt: "Federal Medical Centre Asaba",                    size: "300Ã—100" },
+    "collab-luth":          { src: "media/logos/collab-luth.webp",      alt: "Lagos University Teaching Hospital",              size: "300Ã—100" },
+    "collab-nbhil":         { src: "media/logos/collab-nbhil.webp",     alt: "NBHIL",                                           size: "300Ã—100" },
+    "collab-kiri":          { src: "media/logos/collab-kiri.webp",      alt: "KIRI Engine",                                     size: "300Ã—100" }
   },
 
-  /* PATIENT STORY CARDS — edit text here. type "quote" = text card, "photo" = image card.
-     NOTE: only Daniel's quote came from the design; the repeats are placeholders —
+  /* PATIENT STORY CARDS â€” edit text here. type "quote" = text card, "photo" = image card.
+     NOTE: only Daniel's quote came from the design; the repeats are placeholders â€”
      replace with real, consented patient stories before launch. */
   stories: [
     { type: "quote", tone: "navy",  quote: "I climbed my own stairs again six weeks after surgery. We practiced on those exact stairs.", name: "Daniel Okafor", role: "Patient, Lagos" },
